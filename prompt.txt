@@ -1,0 +1,79 @@
+
+
+-------------------- PROMPT 1 --------------------
+Create an algorithm that takes an array of objects that contains following properties:
+- symbol: string
+- next24HoursBias: string
+---
+Possible values for next24HoursBias are:
+- Strong Bullish
+- Medium Bullish
+- Weak Bullish
+- Neutral
+- Bearish
+- Medium Bearish
+- Strong Bearish
+- undefined
+---
+Possible values for symbol are:
+- USD
+- EUR
+- GBP
+- JPY
+- CHF
+- CAD
+- AUD
+- NZD
+- XAU
+- XAG
+- XPT
+- XPD
+---
+Considerations:
+- symbol is unique
+- next24HoursBias is not unique
+- next24HoursBias can be undefined
+---
+Create other array of objects that contains following properties:
+- pair: string
+- trend: 'up' | 'down' | 'neutral'
+- leftSymbol: string
+- rightSymbol: string
+- score: number
+---
+Possible values for pair are:
+- EURUSD
+- GBPUSD
+- USDJPY
+- USDCHF
+- USDCAD
+- AUDUSD
+- NZDUSD
+- XAUUSD
+- XAGUSD
+- XPTUSD
+- XPDUSD
+- XTIUSD
+---
+Considerations:
+- pair is unique
+- trend is not unique
+- score is not unique
+- trend can be 'up', 'down' or 'neutral'
+- score can be any number
+---
+Now, create a function that takes the first array of objects and returns the second array of objects. this function should:
+- filter the first array of objects by next24HoursBias !== 'undefined'  
+- combine each symbol with each pair
+- calculate the score based on the next24HoursBias and the trend
+- sort the second array of objects by score
+- return the second array of objects
+---
+The score should be calculated as follows:
+- if rightSymbol === 'STRONG'
+
+
+
+
+
+-------------------- PROMPT 2 --------------------

@@ -65,6 +65,7 @@ const scorePossibleTrades = () => {
 // TODO
 // - organize the code
 // - separate the code into files
+// - get the possible trades from the ICMarkets fix api
 // run();
 // sortJsonFile();
 // uniqueSymbols();

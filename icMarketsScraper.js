@@ -1,5 +1,5 @@
 import path from 'path';
-import {FILE_PATH, readJsonFile, saveToJsonFile} from "./shared.js";
+import {ARTICLES_FILE_PATH, readJsonFile, saveToJsonFile} from "./shared.js";
 import fs from "fs";
 const dirPath = path.resolve('../db');
 const filePath = path.resolve(dirPath, 'articles.json');
@@ -143,10 +143,10 @@ const createJsonFileIfNotExist = () => {
  * @param article
  */
 const pushAndSaveToJsonFile = (article) => {
-    const file = fs.readFileSync(FILE_PATH);
+    const file = fs.readFileSync(ARTICLES_FILE_PATH);
     const articles = JSON.parse(file);
     articles.push(article);
-    saveToJsonFile(articles);
+    saveToJsonFile(articles, ARTICLES_FILE_PATH);
 }
 
 /**

@@ -1,6 +1,7 @@
 import fs from 'fs';
 
-export const FILE_PATH = '../db/articles.json'
+export const ARTICLES_FILE_PATH = '../db/articles.json'
+export const SCORED_ARTICLES_FILE_PATH = '../db/scoredArticles.json'
 //     if (symbol === 'USD') return 'USD';
 //     if (symbol === 'Gold (XAU)') return 'XAU';
 //     if (symbol === 'The Australian Dollar (AUD)') return 'AUD';
@@ -127,8 +128,8 @@ export const POSSIBLE_TRADES = [
  * Save the given json article to the json file
  * @param {json} articles
  */
-export const saveToJsonFile = (articles) => {
-    fs.writeFileSync(FILE_PATH, JSON.stringify(articles));
+export const saveToJsonFile = (articles, filePath) => {
+    fs.writeFileSync(filePath, JSON.stringify(articles));
 };
 
 /**
@@ -137,7 +138,7 @@ export const saveToJsonFile = (articles) => {
  */
 export const readJsonFile = () => {
     // read the file
-    const file = fs.readFileSync(FILE_PATH);
+    const file = fs.readFileSync(ARTICLES_FILE_PATH);
     // parse the file
     return JSON.parse(file);
 }
@@ -148,7 +149,7 @@ export const readJsonFile = () => {
  */
 export const uniqueSymbols = () => {
     // read the file
-    const file = fs.readFileSync(FILE_PATH);
+    const file = fs.readFileSync(ARTICLES_FILE_PATH);
     // parse the file
     const articles = JSON.parse(file);
     const symbols = [];

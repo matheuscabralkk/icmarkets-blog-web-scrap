@@ -37,6 +37,8 @@
  * @property {number} score
  * @property {number} leftCurrencyScore
  * @property {number} rightCurrencyScore
+ * @property {ScoreDirection} leftCurrencyDirection
+ * @property {ScoreDirection} rightCurrencyDirection
  */
 
 /**

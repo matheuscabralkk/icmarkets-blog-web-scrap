@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 export const ARTICLES_FILE_PATH = '../db/articles.json'
+export const ERROR_ARTICLES_FILE_PATH = '../db/articlesErrors.json'
 
 /**
  * Save the given json article to the json file

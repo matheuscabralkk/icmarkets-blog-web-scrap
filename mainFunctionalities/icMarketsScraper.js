@@ -1,5 +1,11 @@
 import path from 'path';
-import {ARTICLES_FILE_PATH, readJsonFile, saveToJsonFile, sortJsonFile} from "../utils/shared.js";
+import {
+    ARTICLES_FILE_PATH,
+    ERROR_ARTICLES_FILE_PATH,
+    readJsonFile,
+    saveToJsonFile,
+    sortJsonFile
+} from "../utils/shared.js";
 import fs from "fs";
 import puppeteer from "puppeteer";
 
@@ -137,18 +143,22 @@ const saveArticles = async ({ scrapeAllPages, page, currentArticleListPageUrl}) 
     }
 
 
+    /** @type {Article[]} */
+    let articleErrors = [];
     for (const article of jsonArticles) {
-        try {
-            if (article.articleType === 'forecast') {
-                if (savedArticles.map(article => article.title).includes(article.title)) continue;
+        if (article.articleType === 'forecast') {
+            if (savedArticles.map(article => article.title).includes(article.title)) continue;
+            try {
                 await scrapForecastArticle(page, article);
                 pushAndSaveToJsonFile(article);
+            } catch (e) {
+                // throw new Error(`Error scraping article: ${article.title} - url: ${article.url}. Error: ${e}`);
+                articleErrors.push(article);
+                continue;
             }
-        } catch (e) {
-            console.log(e);
-            throw new Error(e);
         }
     }
+    // if we want scrape only the first page: scrapeAllPages = false / if we want scrape all pages: scrapeAllPages = true
     if (scrapeAllPages) {
         const currentUrl = await page.url();
         if(currentUrl !== currentArticleListPageUrl) await navTo(page, currentArticleListPageUrl);
@@ -163,7 +173,9 @@ const saveArticles = async ({ scrapeAllPages, page, currentArticleListPageUrl}) 
                 scrapeAllPages: true
             });
         }
-
+    }
+    if (articleErrors.length) {
+        await saveToJsonFile(articleErrors, ERROR_ARTICLES_FILE_PATH);
     }
 };
 

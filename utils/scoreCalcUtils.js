@@ -14,30 +14,30 @@ const getScoreByBias = (next24HoursBias) => {
 }
 
 
-export const bullBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const bullBearScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
-    * CASE 1 - EURUSD - this case always will be a long - because the left symbol is bullish and the right symbol is bearish
+    * CASE 1 - EURUSD - this case always will be a long - because the left currency is bullish and the right currency is bearish
     * left (EUR) = weak bullish = 1
     * right (USD) = weak bearish = 1
     * score = 1 + 1 = 2
     * scoreDirection = long
     * meaning: long EURUSD
      */
-    const leftSymbolScore = getScoreByBias(leftSymbolNext24HoursBias);
-    const rightSymbolScore = getScoreByBias(rightSymbolNext24HoursBias);
-    const score = leftSymbolScore + rightSymbolScore;
+    const leftCurrencyScore = getScoreByBias(leftCurrencyNext24HoursBias);
+    const rightCurrencyScore = getScoreByBias(rightCurrencyNext24HoursBias);
+    const score = leftCurrencyScore + rightCurrencyScore;
     const scoreDirection = 'long';
     return {
         score,
         scoreDirection,
-        leftSymbolScore,
-        rightSymbolScore,
-        leftSymbolDirection: 'bullish',
-        rightSymbolDirection: 'bearish'
+        leftCurrencyScore,
+        rightCurrencyScore,
+        leftCurrencyDirection: 'bullish',
+        rightCurrencyDirection: 'bearish'
     };
 }
 
-export const bullBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const bullBullScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
     * CASE 1 - EURUSD
     * left (EUR) = strong bullish = 3
@@ -49,8 +49,8 @@ export const bullBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursB
     * CASE 2
     * left (EUR) = weak bullish = 1
     * right (USD) = strong bullish = 3
-    * score = 1 - 3 = Math.abs(-2) = 2 - reversed because the left symbol is stronger than the right symbol
-    * scoreDirection = short - because the left symbol is stronger than the right symbol
+    * score = 1 - 3 = Math.abs(-2) = 2 - reversed because the left currency is stronger than the right currency
+    * scoreDirection = short - because the left currency is stronger than the right currency
     * meaning: short EURUSD
     * 
     * CASE 3
@@ -60,13 +60,13 @@ export const bullBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursB
     * scoreDirection = neutral
     * meaning: neutral EURUSD
     * */
-    const leftSymbolScore = getScoreByBias(leftSymbolNext24HoursBias);
-    const rightSymbolScore = getScoreByBias(rightSymbolNext24HoursBias);
-    const score = Math.abs(leftSymbolScore - rightSymbolScore);
+    const leftCurrencyScore = getScoreByBias(leftCurrencyNext24HoursBias);
+    const rightCurrencyScore = getScoreByBias(rightCurrencyNext24HoursBias);
+    const score = Math.abs(leftCurrencyScore - rightCurrencyScore);
     let scoreDirection;
-    if (leftSymbolScore > rightSymbolScore) {
+    if (leftCurrencyScore > rightCurrencyScore) {
         scoreDirection = 'long';
-    } else if (leftSymbolScore < rightSymbolScore) {
+    } else if (leftCurrencyScore < rightCurrencyScore) {
         scoreDirection = 'short';
     } else {
         scoreDirection = 'neutral';
@@ -74,14 +74,14 @@ export const bullBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursB
     return {
         score,
         scoreDirection,
-        leftSymbolScore,
-        rightSymbolScore,
-        leftSymbolDirection: 'bullish',
-        rightSymbolDirection: 'bullish'
+        leftCurrencyScore,
+        rightCurrencyScore,
+        leftCurrencyDirection: 'bullish',
+        rightCurrencyDirection: 'bullish'
     };
 }
 
-export const bullNeutralScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const bullNeutralScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
     * CASE 1 - EURUSD
     * left (EUR) = strong bullish = 3
@@ -90,43 +90,43 @@ export const bullNeutralScore = (leftSymbolNext24HoursBias, rightSymbolNext24Hou
     * scoreDirection = long
     * meaning: long EURUSD
      */
-    const leftSymbolScore = getScoreByBias(leftSymbolNext24HoursBias);
-    const score = leftSymbolScore;
-    const scoreDirection = leftSymbolScore ? 'long' : 'short';
+    const leftCurrencyScore = getScoreByBias(leftCurrencyNext24HoursBias);
+    const score = leftCurrencyScore;
+    const scoreDirection = leftCurrencyScore ? 'long' : 'short';
     return {
         score,
         scoreDirection,
-        leftSymbolScore,
-        rightSymbolScore: 0,
-        leftSymbolDirection: 'bullish',
-        rightSymbolDirection: 'neutral'
+        leftCurrencyScore,
+        rightCurrencyScore: 0,
+        leftCurrencyDirection: 'bullish',
+        rightCurrencyDirection: 'neutral'
     };
 }
 
-export const bearBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const bearBullScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
-    * CASE 1 - EURUSD - this case always will be a short - because the left symbol is bearish and the right symbol is bullish
+    * CASE 1 - EURUSD - this case always will be a short - because the left currency is bearish and the right currency is bullish
     * left (EUR) = weak bearish = 1
     * right (USD) = weak bullish = 1
     * score = 1 + 1 = 2
     * scoreDirection = short
     * meaning: short EURUSD
      */
-    const leftSymbolScore = getScoreByBias(leftSymbolNext24HoursBias);
-    const rightSymbolScore = getScoreByBias(rightSymbolNext24HoursBias);
-    const score = leftSymbolScore + rightSymbolScore;
+    const leftCurrencyScore = getScoreByBias(leftCurrencyNext24HoursBias);
+    const rightCurrencyScore = getScoreByBias(rightCurrencyNext24HoursBias);
+    const score = leftCurrencyScore + rightCurrencyScore;
     const scoreDirection = 'short';
     return {
         score,
         scoreDirection,
-        leftSymbolScore,
-        rightSymbolScore,
-        leftSymbolDirection: 'bearish',
-        rightSymbolDirection: 'bullish'
+        leftCurrencyScore,
+        rightCurrencyScore,
+        leftCurrencyDirection: 'bearish',
+        rightCurrencyDirection: 'bullish'
     };
 }
 
-export const bearBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const bearBearScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
     * CASE 1 - EURUSD
     * left (EUR) = strong bearish = 3
@@ -138,8 +138,8 @@ export const bearBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursB
     * CASE 2
     * left (EUR) = weak bearish = 1
     * right (USD) = strong bearish = 3
-    * score = 1 - 3 = Math.abs(-2) = 2 - reversed because the left symbol is stronger than the right symbol
-    * scoreDirection = long - because the left symbol is stronger than the right symbol
+    * score = 1 - 3 = Math.abs(-2) = 2 - reversed because the left currency is stronger than the right currency
+    * scoreDirection = long - because the left currency is stronger than the right currency
     * meaning: long EURUSD
     * 
     * CASE 3
@@ -149,13 +149,13 @@ export const bearBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursB
     * scoreDirection = neutral
     * meaning: neutral EURUSD
     * */
-    const leftSymbolScore = getScoreByBias(leftSymbolNext24HoursBias);
-    const rightSymbolScore = getScoreByBias(rightSymbolNext24HoursBias);
-    const score = Math.abs(leftSymbolScore - rightSymbolScore);
+    const leftCurrencyScore = getScoreByBias(leftCurrencyNext24HoursBias);
+    const rightCurrencyScore = getScoreByBias(rightCurrencyNext24HoursBias);
+    const score = Math.abs(leftCurrencyScore - rightCurrencyScore);
     let scoreDirection;
-    if (leftSymbolScore > rightSymbolScore) {
+    if (leftCurrencyScore > rightCurrencyScore) {
         scoreDirection = 'short';
-    } else if (leftSymbolScore < rightSymbolScore) {
+    } else if (leftCurrencyScore < rightCurrencyScore) {
         scoreDirection = 'long';
     } else {
         scoreDirection = 'neutral';
@@ -163,14 +163,14 @@ export const bearBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursB
     return {
         score,
         scoreDirection,
-        leftSymbolScore,
-        rightSymbolScore,
-        leftSymbolDirection: 'bearish',
-        rightSymbolDirection: 'bearish'
+        leftCurrencyScore,
+        rightCurrencyScore,
+        leftCurrencyDirection: 'bearish',
+        rightCurrencyDirection: 'bearish'
     };
 }
 
-export const bearNeutralScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const bearNeutralScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
     * CASE 1 - EURUSD
     * left (EUR) = strong bearish = 3
@@ -179,20 +179,20 @@ export const bearNeutralScore = (leftSymbolNext24HoursBias, rightSymbolNext24Hou
     * scoreDirection = short
     * meaning: short EURUSD
      */
-    const leftSymbolScore = getScoreByBias(leftSymbolNext24HoursBias);
-    const score = leftSymbolScore;
-    const scoreDirection = !leftSymbolScore ? 'neutral' : 'short';
+    const leftCurrencyScore = getScoreByBias(leftCurrencyNext24HoursBias);
+    const score = leftCurrencyScore;
+    const scoreDirection = !leftCurrencyScore ? 'neutral' : 'short';
     return {
         score,
         scoreDirection,
-        leftSymbolScore,
-        rightSymbolScore: 0,
-        leftSymbolDirection: 'bearish',
-        rightSymbolDirection: 'neutral'
+        leftCurrencyScore,
+        rightCurrencyScore: 0,
+        leftCurrencyDirection: 'bearish',
+        rightCurrencyDirection: 'neutral'
     };
 }
 
-export const neutralBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const neutralBullScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
     * CASE 1 - EURUSD
     * left (EUR) = neutral = 0
@@ -201,20 +201,20 @@ export const neutralBullScore = (leftSymbolNext24HoursBias, rightSymbolNext24Hou
     * scoreDirection = short
     * meaning: short EURUSD
      */
-    const rightSymbolScore = getScoreByBias(rightSymbolNext24HoursBias);
-    const score = rightSymbolScore;
+    const rightCurrencyScore = getScoreByBias(rightCurrencyNext24HoursBias);
+    const score = rightCurrencyScore;
     const scoreDirection = 'short';
     return {
         score,
         scoreDirection,
-        leftSymbolScore: 0,
-        rightSymbolScore,
-        leftSymbolDirection: 'neutral',
-        rightSymbolDirection: 'bullish'
+        leftCurrencyScore: 0,
+        rightCurrencyScore,
+        leftCurrencyDirection: 'neutral',
+        rightCurrencyDirection: 'bullish'
     };
 }
 
-export const neutralBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24HoursBias) => {
+export const neutralBearScore = (leftCurrencyNext24HoursBias, rightCurrencyNext24HoursBias) => {
     /*
     * CASE 1 - EURUSD
     * left (EUR) = neutral = 0
@@ -223,16 +223,16 @@ export const neutralBearScore = (leftSymbolNext24HoursBias, rightSymbolNext24Hou
     * scoreDirection = short
     * meaning: short EURUSD
      */
-    const rightSymbolScore = getScoreByBias(rightSymbolNext24HoursBias);
-    const score = rightSymbolScore;
+    const rightCurrencyScore = getScoreByBias(rightCurrencyNext24HoursBias);
+    const score = rightCurrencyScore;
     const scoreDirection = 'long';
     return {
         score,
         scoreDirection,
-        leftSymbolScore: 0,
-        rightSymbolScore,
-        leftSymbolDirection: 'neutral',
-        rightSymbolDirection: 'bearish'
+        leftCurrencyScore: 0,
+        rightCurrencyScore,
+        leftCurrencyDirection: 'neutral',
+        rightCurrencyDirection: 'bearish'
     };
 }
 
@@ -248,9 +248,9 @@ export const neutralNeutralScore = () => {
     return {
         score: 0,
         scoreDirection: 'neutral',
-        leftSymbolScore: 0,
-        rightSymbolScore: 0,
-        leftSymbolDirection: 'neutral',
-        rightSymbolDirection: 'neutral'
+        leftCurrencyScore: 0,
+        rightCurrencyScore: 0,
+        leftCurrencyDirection: 'neutral',
+        rightCurrencyDirection: 'neutral'
     };
 }

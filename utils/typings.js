@@ -1,10 +1,14 @@
 /**
- * @typedef {Object} Symbol
- * @property {('USD'|'XAU'|'XAG'|'EUR'|'GBP'|'JPY'|'AUD'|'NZD'|'CAD'|'CHF')} symbol
- * @property {string} articleSymbol
- * @property {string[]} keyNewsEventsToday
- * @property {string[]} whatCanWeExpect
- * @property {string[]} centralBankNotes
+ * @typedef {Object} Insight
+ * @property {string} title
+ * @property {Array<string>} paragraphs
+ */
+
+/**
+ * @typedef {Object} Currency
+ * @property {('USD'|'XAU'|'XAG'|'EUR'|'GBP'|'JPY'|'AUD'|'NZD'|'CAD'|'CHF')} currencyName
+ * @property {string} articleCurrency
+ * @property {Insight[]} currencyInsights
  * @property {Next24HoursBias} next24HoursBias
  */
 
@@ -17,10 +21,8 @@
  * @property {string} dateStr
  * @property {Date} date
  * @property {string} subtitle
- * @property {string[]} whatHappened
- * @property {string[]} whatDoesItMean
- * @property {Symbol[]} symbols
- * @property {PossibleTrade[]} [possibleTrades] - optional
+ * @property {Insight[]} articleInsights
+ * @property {Currency[]} currencies
  */
 
 /**
@@ -29,14 +31,19 @@
 
 /**
  * @typedef {Object} PossibleTrade
- * @property {string} leftSymbol
- * @property {string} rightSymbol
+ * @property {string} leftCurrency
+ * @property {string} rightCurrency
  * @property {string} pair
  * @property {number} score
- * @property {number} leftSymbolScore
- * @property {number} rightSymbolScore
+ * @property {number} leftCurrencyScore
+ * @property {number} rightCurrencyScore
  */
 
 /**
  * @typedef {('Strong Bullish'|'Medium Bullish'|'Weak Bullish'|'Neutral'|'Bearish'|'Medium Bearish'|'Strong Bearish'|undefined)} Next24HoursBias
+ */
+
+
+/**
+ * @typedef {('long'|'short'|'neutral')} ScoreDirection
  */

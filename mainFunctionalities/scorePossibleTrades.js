@@ -200,12 +200,12 @@ export const scorePossibleTrades = () => {
                             } = scoreNext24HoursBias(leftCurrency.next24HoursBias, rightCurrency.next24HoursBias)
 
                             scoredArticle.possibleTrades.push({
-                                score,
-                                scoreDirection,
-                                leftCurrencyScore,
-                                rightCurrencyScore,
-                                leftCurrencyDirection,
-                                rightCurrencyDirection,
+                                score: score ?? 0,
+                                scoreDirection: scoreDirection ?? 'neutral',
+                                leftCurrencyScore: leftCurrencyScore ?? 0,
+                                rightCurrencyScore: rightCurrencyScore ?? 0,
+                                leftCurrencyDirection: leftCurrencyDirection ?? 'neutral',
+                                rightCurrencyDirection: rightCurrencyDirection ?? 'neutral',
                                 leftCurrency: leftCurrency.currencyName,
                                 rightCurrency: rightCurrency.currencyName,
                                 pair: `${leftCurrency.currencyName}${rightCurrency.currencyName}`,

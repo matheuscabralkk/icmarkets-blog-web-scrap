@@ -4,8 +4,7 @@ import {runWebScrapping} from "./mainFunctionalities/icMarketsScraper.js";
 
 
 // TODO
-// - get the possible trades from the ICMarkets fix api
-// runWebScrapping();
+runWebScrapping();
 // sortJsonFile();
 // uniqueCurrencies();
-scorePossibleTrades();
+// scorePossibleTrades();
